@@ -1,0 +1,17 @@
+FROM golang:latest as builder
+LABEL maintainer="tomasz.szymanski@greenit.com.pl"
+WORKDIR /code/
+COPY code/app.go .
+
+# budujemy aplikacje
+RUN go build -o app .
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+COPY --from=builder /code/app .
+
+CMD ["./app"]
+
