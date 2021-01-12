@@ -1,0 +1,12 @@
+FROM golang:latest as builder
+LABEL maintainer="tomasz.szymanski@greenit.com.pl"
+WORKDIR /code/
+COPY code/app.go .
+
+# budujemy aplikacje
+RUN CGO_ENABLED=0 GOOS=linux go build -v -a -tags netgo -ldflags '-w' -o main .
+
+FROM scratch
+COPY --from=builder /code/app .
+CMD ["/app"]
+

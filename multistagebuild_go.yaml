@@ -1,0 +1,41 @@
+---
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "mytestbuild-go"
+  label:
+    app: "mytestbuild-go"
+spec:
+  runPolicy: "Serial"
+  source:
+    dockerfile: |-
+      FROM golang:alpine as builder
+      LABEL maintainer="tomasz.szymanski@greenit.com.pl"
+      RUN mkdir /code/
+      WORKDIR /code/
+      RUN apk add --update curl && \
+          rm -rf /var/cache/apk/* && \
+          curl https://raw.githubusercontent.com/jorgemoralespou/ose-chained-builds/master/go-scratch/hello_world/main.go -o main.go
+      # budujemy aplikacje
+      # RUN go build -o main .
+      RUN CGO_ENABLED=0 GOOS=linux go build -v -a -tags netgo -ldflags '-w' -o main .
+      
+      FROM scratch
+      COPY --from=builder /code/main /main
+      EXPOSE 8080/tcp
+      CMD ["/main"]
+  strategy:
+    dockerStrategy:
+      noCache: true
+  output:
+    to:
+      kind: "ImageStreamTag"
+      name: mytestbuildimage-go:latest
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: mytestbuildimage-go
+spec:
+  lookupPolicy:
+    local: false
