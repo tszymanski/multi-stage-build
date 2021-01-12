@@ -22,7 +22,7 @@ docker images | grep one-stage
 Run container from new image
 
 ```bash
-$ docker run --rm=true --name onestage-test --hostname onestage-test onestage:latest
+$ docker run --rm=true --name onestage-test --hostname onestage-test one-stage:latest
 ```
 
 ### multi-stage build
@@ -36,10 +36,29 @@ docker build -f multi-stage:latest -f Dockerfile_multistage .
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-test --host multistage-test multistage:latest
+$ docker run --rm=true --name multistage-test --host multistage-test multi-stage:latest
 ```
 
 Compare both new images:
+
+```bash
+docker images | grep stage
+```
+
+#### multi-stage build based on scratch image
+
+The Application will be compiled with all libs, so it can be run as standalone
+
+```bash 
+$ docker build -t multistage-scratch:latest -f Dockerfile_multistage_scratch .
+```
+Run container from new image:
+
+```bash
+$ docker run --rm=true --name multistage-scratch-test --host multistage-test multistage-scratch:latest
+```
+
+Compare all new images: 
 
 ```bash
 docker images | grep stage
