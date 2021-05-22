@@ -30,13 +30,13 @@ $ docker run --rm=true --name onestage-test --hostname onestage-test one-stage:l
 To use multi-stage feature just do:
 
 ```bash 
-docker build -f multi-stage:latest -f Dockerfile_multistage .
+docker build -t multi-stage:latest -f Dockerfile_multistage .
 ```
 
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-test --host multistage-test multi-stage:latest
+$ docker run --rm=true --name multistage-test --hostname multistage-test multi-stage:latest
 ```
 
 Compare both new images:
@@ -55,7 +55,7 @@ $ docker build -t multistage-scratch:latest -f Dockerfile_multistage_scratch .
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-scratch-test --host multistage-test multistage-scratch:latest
+$ docker run --rm=true --name multistage-scratch-test --hostname multistage-scratch multistage-scratch:latest
 ```
 
 Compare all new images: 

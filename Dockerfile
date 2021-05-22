@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:1.15
 LABEL maintainer="tomasz.szymanski@greenit.com.pl"
 WORKDIR /code/
 COPY code/app.go .
