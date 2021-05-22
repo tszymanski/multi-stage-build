@@ -50,12 +50,12 @@ docker images | grep stage
 The Application will be compiled with all libs, so it can be run as standalone
 
 ```bash 
-$ docker build -t multistage-scratch:latest -f Dockerfile_multistage_scratch .
+$ docker build -t multi-stage-scratch:latest -f Dockerfile_multistage_scratch .
 ```
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-scratch-test --hostname multistage-scratch multistage-scratch:latest
+$ docker run --rm=true --name multistage-scratch-test --hostname multistage-scratch multi-stage-scratch:latest
 ```
 
 Compare all new images: 
