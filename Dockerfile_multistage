@@ -9,6 +9,7 @@ RUN go build -o app .
 FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
+LABEL example="multi-stage"
 
 WORKDIR /root/
 COPY --from=builder /code/app .

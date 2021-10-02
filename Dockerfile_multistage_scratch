@@ -7,6 +7,7 @@ COPY code/app.go .
 RUN CGO_ENABLED=0 GOOS=linux go build -v -a -tags netgo -ldflags '-w' -o app .
 
 FROM scratch
+LABEL example="multi-stage"
 COPY --from=builder /code/app .
 CMD ["/app"]
 
