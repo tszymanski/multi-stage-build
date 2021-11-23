@@ -9,7 +9,7 @@ spec:
   runPolicy: "Serial"
   source:
     dockerfile: |-
-      FROM golang:latest as builder
+      FROM golang:1.15 as builder
       LABEL maintainer="tomasz.szymanski@greenit.com.pl"
       RUN mkdir /code/
       WORKDIR /code/
