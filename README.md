@@ -22,7 +22,7 @@ docker image ls -f label=example=multi-stage
 Run container from new image
 
 ```bash
-$ docker run --rm=true --name onestage-test --hostname onestage-test one-stage:latest
+docker run --rm=true --name onestage-test --hostname onestage-test one-stage:latest
 ```
 
 ### multi-stage build
@@ -36,7 +36,7 @@ docker build -t multi-stage:latest -f Dockerfile_multistage .
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-test --hostname multistage-test multi-stage:latest
+docker run --rm=true --name multistage-test --hostname multistage-test multi-stage:latest
 ```
 
 Compare both new images:
@@ -50,12 +50,12 @@ docker image ls -f label=example=multi-stage
 The Application will be compiled with all libs, so it can be run as standalone
 
 ```bash 
-$ docker build -t multi-stage-scratch:latest -f Dockerfile_multistage_scratch .
+docker build -t multi-stage-scratch:latest -f Dockerfile_multistage_scratch .
 ```
 Run container from new image:
 
 ```bash
-$ docker run --rm=true --name multistage-scratch-test --hostname multistage-scratch multi-stage-scratch:latest
+docker run --rm=true --name multistage-scratch-test --hostname multistage-scratch multi-stage-scratch:latest
 ```
 
 Compare all new images: 
