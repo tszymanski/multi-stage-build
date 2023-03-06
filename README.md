@@ -17,7 +17,7 @@ docker build -t one-stage:latest -f Dockerfile .
 Check images size: 
 
 ```bash 
-docker images | grep one-stage
+docker image ls -f label=example=multi-stage
 ```
 Run container from new image
 
@@ -42,7 +42,7 @@ $ docker run --rm=true --name multistage-test --hostname multistage-test multi-s
 Compare both new images:
 
 ```bash
-docker images | grep stage
+docker image ls -f label=example=multi-stage
 ```
 
 #### multi-stage build based on scratch image
@@ -61,6 +61,6 @@ $ docker run --rm=true --name multistage-scratch-test --hostname multistage-scra
 Compare all new images: 
 
 ```bash
-docker images | grep stage
+docker image ls -f label=example=multi-stage
 ```
 
